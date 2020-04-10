@@ -21,10 +21,18 @@ import java.util.Set;
 public class JsonArray extends UDF{
 
     /**
-     * @param jsonString  可以接收的参数格式 ① [{},{}] ② {"key1":[{},{}],"key2":[{},{}]}
+     * 这里之所以参数类型设置为Object是因为hive中的null和java中的null是不一样的.
+     * hive中的null不是String类型,如果传进来的参数是null，是直接会报错.所以这里将参数类型设置为Object
+     * 在代码里根据参数的具体类型做具体处理.
+     * @param jsonStr  可以接收的参数格式 ① [{},{}] ② {"key1":[{},{}],"key2":[{},{}]}
      * @return          json数组转换后的list集合
      */
-    public ArrayList<String> evaluate(String jsonString){
+    public ArrayList<String> evaluate(Object jsonStr){
+
+        //如果不是String类型，返回null
+        if(!(jsonStr instanceof String)) return null;
+        String jsonString = (String) jsonStr;
+
         if(jsonString.startsWith("[")){
             return getJsonList(jsonString);
         }else if(jsonString.startsWith("{")){
@@ -76,5 +84,6 @@ public class JsonArray extends UDF{
 
         return result;
     }
+
 
 }
