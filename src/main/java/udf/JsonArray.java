@@ -42,7 +42,7 @@ public class JsonArray extends UDF{
         }
     }
 
-    //将一个json数组转换成一个list集合返回    [{},{}]  ---->  list集合  list集合在hive中相当于是数组,就可以直接split
+    //将一个json数组转换成一个list集合返回    [{},{}]  ---->  list集合  list集合在hive中相当于是数组,就可以直接使用explode函数
     public ArrayList<String> getJsonList(String jsonArrayString){
         if(jsonArrayString.length() == 0 || jsonArrayString == null) return null;
 
