@@ -60,6 +60,7 @@ public class JsonArray extends UDF{
         }catch (Exception e){
             return null;
         }
+        //获取json对象中所有的key
         Set<String> keys = jsonObject.keySet();
         ArrayList<Object> jsonObjList = new ArrayList<Object>();
         //获取所有的json对象(格式上是一个json数组)
