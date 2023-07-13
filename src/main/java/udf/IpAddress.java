@@ -23,7 +23,8 @@ public class IpAddress extends UDF {
              */
             String resourcePath = hiveConf.getVar(HiveConf.ConfVars.DOWNLOADED_RESOURCES_DIR); //hive.downloaded.resources.dir
             String filePath = resourcePath + "/" + "ip2region.xdb";
-            searcher = Searcher.newWithFileOnly(filePath);
+            byte[] bytes = Searcher.loadContentFromFile(filePath);
+            this.searcher =  Searcher.newWithBuffer(bytes);
         }
     }
 
